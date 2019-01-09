@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { MenuPage } from '../menu/menu';
+import { RegistryPage } from '../registry/registry';
+import { DiveCardPage } from '../dive-card/dive-card';
 
 @Component({
-  selector: 'page-news',
-  templateUrl: 'news.html'
+  selector: 'page-menu',
+  templateUrl: 'menu.html'
 })
-export class NewsPage {
+export class MenuPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
   constructor(public navCtrl: NavController) {
   }
-  goToMenu(params){
+  goToRegistry(params){
     if (!params) params = {};
-    this.navCtrl.push(MenuPage);
+    this.navCtrl.push(RegistryPage);
   }
 }

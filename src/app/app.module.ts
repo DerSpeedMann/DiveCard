@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { DiveCardPage } from '../pages/dive-card/dive-card';
+import { MenuPage } from '../pages/menu/menu';
 import { NewsPage } from '../pages/news/news';
 import { TabsControllerPage } from '../pages/tabs-controller/tabs-controller';
-import { DiveCard2Page } from '../pages/dive-card2/dive-card2';
-import { MenPage } from '../pages/men/men';
+import { RegistryPage } from '../pages/registry/registry';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -16,10 +16,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     DiveCardPage,
+    MenuPage,
     NewsPage,
     TabsControllerPage,
-    DiveCard2Page,
-    MenPage
+    RegistryPage
   ],
   imports: [
     BrowserModule,
@@ -29,10 +29,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     DiveCardPage,
+    MenuPage,
     NewsPage,
     TabsControllerPage,
-    DiveCard2Page,
-    MenPage
+    RegistryPage
   ],
   providers: [
     StatusBar,
