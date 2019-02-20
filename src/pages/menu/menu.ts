@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { RegistryPage } from '../registry/registry';
-import { DiveCardPage } from '../dive-card/dive-card';
+import { NavController, Tab, Tabs } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-menu',
@@ -10,10 +9,42 @@ import { DiveCardPage } from '../dive-card/dive-card';
 export class MenuPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  constructor(public navCtrl: NavController) {
+
+  constructor(public navCtrl: NavController, public events: Events) {   
   }
-  goToRegistry(params){
-    if (!params) params = {};
-    this.navCtrl.push(RegistryPage);
+
+  // Hide Tabs when entering the menu
+  ionViewWillEnter(){
+    let tabs = document.querySelectorAll(".tabbar")
+
+    if (tabs != null) {
+      Object.keys(tabs).map((key) => {
+          tabs[key].style.display = 'none'
+      });
+    }
+  }
+
+  // Make Tabs visible again after leaving the menu
+  ionViewWillLeave() {
+    let tabs = document.querySelectorAll(".tabbar")
+
+    if (tabs != null) {
+      Object.keys(tabs).map((key) => {
+          tabs[key].style.display = 'flex'
+      });
+    }
+  }
+
+  newRegistration(){
+    // remove old Data
+    localStorage.clear()
+
+    // Notivy tab Controller
+    this.events.publish('update:registration')
+
+    // Navigate to Registry
+    this.navCtrl.parent.select(0)
+    this.navCtrl.popToRoot()
   }
 }
+

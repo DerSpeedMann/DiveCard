@@ -13,32 +13,32 @@
 <ion-content padding id="page5">
   <form id="registry-form2">
     <ion-list id="registry-list3">
-      <ion-item id="registry-input1">
+      <ion-item id="i_firstname">
         <ion-label>
           Vorname
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input type="text" [(ngModel)]="firstname" name="first" placeholder=""></ion-input>
       </ion-item>
-      <ion-item id="registry-input4">
+      <ion-item id="i_lastname">
         <ion-label>
           Nachname
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input type="text" [(ngModel)]="lastname" name="last" placeholder=""></ion-input>
       </ion-item>
-      <ion-item id="registry-input5">
+      <ion-item id="i_code">
         <ion-label>
           Activierungscode
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input type="text" [(ngModel)]="code" name="code" placeholder=""></ion-input>
       </ion-item>
-      <ion-item id="registry-input2">
+      <ion-item id="i_date">
         <ion-label>
           Kaufdatum
         </ion-label>
-        <ion-input type="date" placeholder=""></ion-input>
+        <ion-input type="date" [(ngModel)]="date" name="date" placeholder=""></ion-input>
       </ion-item>
     </ion-list>
-    <button id="registry-button2" ion-button color="stable" block on-click="goToDiveCard()">
+    <button id="registry-button2" ion-button color="stable" block on-click="register()">
       Registrieren
     </button>
   </form>
