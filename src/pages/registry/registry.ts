@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MenuPage } from '../menu/menu';
 import { Events } from 'ionic-angular';
-import { ElementRef } from '@angular/core';
-import { elementAttribute } from '@angular/core/src/render3/instructions';
+import { AlertController } from 'ionic-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { RegistryController } from '../../controller/registryController';
+import { User } from '../../data/user';
 
 @Component({
   selector: 'page-registry',
@@ -14,25 +16,33 @@ export class RegistryPage {
   lastname: string
   code: string
   date: string
+  registryForm: FormGroup
 
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  constructor(public navCtrl: NavController, public events: Events, public element: ElementRef) {
+  constructor(public navCtrl: NavController,
+               public events: Events,  
+               private alertCtrl: AlertController,
+               private formBuilder: FormBuilder) {
+    
+    this.registryForm = RegistryController.getValidationProperties(formBuilder)
   }
 
-  register(){
-    // save Data
-    localStorage.setItem("firstname", this.firstname)
-    localStorage.setItem("lastname", this.lastname)
-    localStorage.setItem("code", this.code)
-    localStorage.setItem("date", this.date)
 
-    // Notivy tab Controller
-    this.events.publish('update:registration')
+  private register(){
+    // check input Data
+    let alert = this.alertCtrl.create()
+    if(RegistryController.checkInput(this.registryForm, alert)){
+      let user = new User(this.firstname,this.lastname,this.code,this.date)
+      RegistryController.register(user)
 
-    // Navigate to Card / Profile
-    this.navCtrl.parent.select(0)
-    this.navCtrl.popToRoot()
+      // Notivy tab Controller
+      this.events.publish('update:registration')
+
+      // Navigate to Card / Profile
+      this.navCtrl.parent.select(0)
+      this.navCtrl.popToRoot()
+    }
   }
 
   goToMenu(){

@@ -4,6 +4,7 @@ import { DiveCardPage } from '../dive-card/dive-card';
 import { NewsPage } from '../news/news';
 import { RegistryPage } from '../registry/registry';
 import { Events } from 'ionic-angular';
+import { RegistryController } from '../../controller/registryController';
 
 @Component({
   selector: 'page-tabs-controller',
@@ -18,7 +19,7 @@ export class TabsControllerPage {
   constructor(public navCtrl: NavController, public events: Events) {
 
     // check if registered
-    if(localStorage.getItem("code")){
+    if(RegistryController.isRegistered()){
       this.tab1Root = DiveCardPage;
     }
     
@@ -28,7 +29,7 @@ export class TabsControllerPage {
   }
 
   isRegistered(){
-    if(localStorage.getItem("code")){
+    if(RegistryController.isRegistered()){
       this.tab1Root = DiveCardPage      
     }else{
       this.tab1Root = RegistryPage

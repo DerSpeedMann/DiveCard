@@ -11,34 +11,34 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page5">
-  <form id="registry-form2">
+  <form [formGroup]="registryForm" id="registry-form2">
     <ion-list id="registry-list3">
       <ion-item id="i_firstname">
         <ion-label>
           Vorname
         </ion-label>
-        <ion-input type="text" [(ngModel)]="firstname" name="first" placeholder=""></ion-input>
+        <ion-input formControlName="f_firstname" type="text"  [(ngModel)]="firstname" name="first" text-right></ion-input>
       </ion-item>
       <ion-item id="i_lastname">
         <ion-label>
           Nachname
         </ion-label>
-        <ion-input type="text" [(ngModel)]="lastname" name="last" placeholder=""></ion-input>
+        <ion-input formControlName="f_lastname" type="text" [(ngModel)]="lastname" name="last" text-right></ion-input>
       </ion-item>
       <ion-item id="i_code">
         <ion-label>
           Activierungscode
         </ion-label>
-        <ion-input type="text" [(ngModel)]="code" name="code" placeholder=""></ion-input>
+        <ion-input formControlName="f_code" type="text" [(ngModel)]="code" name="code" text-right></ion-input>
       </ion-item>
       <ion-item id="i_date">
         <ion-label>
           Kaufdatum
         </ion-label>
-        <ion-input type="date" [(ngModel)]="date" name="date" placeholder=""></ion-input>
+        <ion-datetime displayFormat="DD.MMM.YYYY" pickerFormat="DD.MMM.YYYY" formControlName="f_date" [(ngModel)]="date" name="date"></ion-datetime>
       </ion-item>
     </ion-list>
-    <button id="registry-button2" ion-button color="stable" block on-click="register()">
+    <button ion-button id="registry-button2"  (click)="register()" color="stable" block>
       Registrieren
     </button>
   </form>

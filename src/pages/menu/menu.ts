@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, Tab, Tabs } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
+import { RegistryController } from '../../controller/registryController';
 
 @Component({
   selector: 'page-menu',
@@ -10,7 +11,7 @@ export class MenuPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
 
-  constructor(public navCtrl: NavController, public events: Events) {   
+  constructor(public navCtrl: NavController,private alertCtrl: AlertController, public events: Events) {   
   }
 
   // Hide Tabs when entering the menu
@@ -35,9 +36,27 @@ export class MenuPage {
     }
   }
 
+  async newRegistrationAlert() {
+    const alert = await this.alertCtrl.create({
+      title: 'Alte Karte wird Gelöscht!',
+      message: 'Sind sie sicher das sie eine neue Karte registrieren möchten? Ihre alte Karte wird dadurch gelöscht',
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => this.newRegistration()
+        },
+        {
+          text: 'Abbrechen',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }
+      ]
+    });
+
+    await alert.present();
+  }
   newRegistration(){
-    // remove old Data
-    localStorage.clear()
+    RegistryController.deleteUser()
 
     // Notivy tab Controller
     this.events.publish('update:registration')
