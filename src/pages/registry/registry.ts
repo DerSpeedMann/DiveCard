@@ -33,7 +33,12 @@ export class RegistryPage {
     // check input Data
     let alert = this.alertCtrl.create()
     if(RegistryController.checkInput(this.registryForm, alert)){
-      let user = new User(this.firstname,this.lastname,this.code,this.date)
+      let date = new Date(); // today's date
+      date.setDate(date.getDate() + 7);
+
+      let next_date = new Date(date).toISOString().split('T')[0]; // formatting the new date in form 'YYYY-mm-dd'
+
+      let user = new User(this.firstname,this.lastname,this.code,this.date,next_date)
       RegistryController.register(user)
 
       // Notivy tab Controller
